@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, request
+from math import pi
 
 app = Flask(__name__)
 
@@ -13,7 +14,8 @@ def index():
         user_fgr = float(request.form['fgr'])
         user_wheelradius = float(request.form['wheelradius'])
         totalrpm = user_kv * user_batteryVolt
-        speed = (totalrpm / ((user_spur / user_pinion) * user_fgr) * user_wheelradius * (60 / 5280))
+        wheel_circum = 2*pi*user_wheelradius
+        speed = (totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280))
         return render_template("index.html", speed_display=speed)
 
 
