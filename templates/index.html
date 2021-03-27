@@ -9,17 +9,17 @@
         <h1>Please fill in the following specifications</h1>
         <form action="/" method="POST">
             <label for="motorkV">Motor kV Rating:</label>
-            <input type="number" id="motorkV" name="motorkV"></form><br><br>
+            <input type="number" id="motorkV" name="motorkV"><br><br>
             <label for="battVolt">Battery Voltage:</label>
-            <input type="number" id="battVolt" name="battVolt"><br><br>
+            <input type="number" id="battVolt" name="battVolt" step="0.01"><br><br>
             <label for="pinion">Pinion Gear Tooth Count:</label>
             <input type="number" id="pinion" name="pinion"><br><br>
             <label for="spur">Spur Gear Tooth Count:</label>
             <input type="number" id="spur" name="spur"><br><br>
             <label for="fgr">Final Gear Ratio (differential ratio?):</label>
-            <input type="number" id="fgr" name="fgr"><br><br>
+            <input type="number" id="fgr" name="fgr" step="0.01"><br><br>
             <label for="wheelradius">Wheel Radius (inches):</label>
-            <input type="number" id="wheelradius" name="wheelradius"><br><br>
+            <input type="number" id="wheelradius" name="wheelradius" step="0.01"><br><br>
             <input type="submit" value="Calculate">
 
         </form>
