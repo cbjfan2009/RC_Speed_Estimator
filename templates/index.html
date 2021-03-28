@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <div class="content">
-        <h1>Please fill in the following specifications</h1>
+    <div class="content" id="input-box" style="border: 10px solid black; padding: 20px">
+        <h1 style="text-align: center">Please fill in the following specifications</h1>
         <form action="/" method="POST">
             <label for="motorkV">Motor kV Rating:</label>
             <input type="number" id="motorkV" name="motorkV"><br><br>
@@ -26,10 +26,20 @@
         <p style="color:red; font-weight: bold" >Please fill out the boxes and click submit to estimate the approximate speed of your vehicle in miles per hour (mph)</p>
     </div>
     <div>
-        <table>
-            <th>Calculated Speed</th>
+         <p style="font-weight: bold">Calculated Speed</p>
 
-            <tr>{{ speed_display }}</tr>
-        </table>
+         <p>{{ speed_display }}</p>
+
+    </div>
+
+    <div class="motor-reference">
+        <h3>
+        If you need a reference for brushed motor kV ratings, click here for Hobbywing's research:
+        </h3>
+        <a href="http://www.hobbywing.com/products/enpdf/KVen.pdf">Hobbywing Brushed Motor Specification PDF</a>
+    </div>
+
+    <div>
+        <a href="hiddenpage.html">hidden</a>
     </div>
 {% endblock %}

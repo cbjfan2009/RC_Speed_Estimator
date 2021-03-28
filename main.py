@@ -18,9 +18,13 @@ def index():
         speed = (totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280))
         return render_template("index.html", speed_display=speed)
 
-
     else:
         return render_template("index.html")
+
+@app.route('/hiddenpage')
+def hiddenpage():
+    return render_template("hiddenpage.html")
+
 
 
 if __name__ == "__main__":
