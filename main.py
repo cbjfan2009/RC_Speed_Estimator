@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 from math import pi
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ def index():
     else:
         return render_template("index.html")
 
-@app.route('/hiddenpage')
+@app.route('/hiddenpage/')
 def hiddenpage():
     return render_template("hiddenpage.html")
 
