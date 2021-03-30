@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="content" id="input-box" style="border: 10px solid black; padding: 20px">
+    <div class="content" id="input-box">
         <h1 style="text-align: center">Please fill in the following specifications</h1>
         <form action="/" method="POST">
             <label for="motorkV">Motor kV Rating:</label>
@@ -28,11 +28,11 @@
     <div id="speed-display">
          <p>Calculated Speed</p>
 
-         <p>{{ speed_display }}</p>
+         <p style="font-size:35px; color:red;">{{ speed_display }}</p>
 
     </div>
 
-    <div class="motor-reference">
+    <div id="motor-reference">
         <h3>
         If you need a reference for brushed motor kV ratings, click here for Hobbywing's research:
         </h3>
