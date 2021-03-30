@@ -2,10 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    {% block head %} {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/main.css') }}">
+
+    {% block head %}{% endblock %}
 </head>
 <body>
+    <div class="container">
+        <h1 class="logo">First Web App</h1>
+        <strong><nav>
+          <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('hiddenpage') }}">About</a></li>
+          </ul>
+        </nav></strong>
+      </div>
     {% block body %} {% endblock %}
 </body>
 </html>

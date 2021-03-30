@@ -21,7 +21,7 @@ def index():
     else:
         return render_template("index.html")
 
-@app.route('/hiddenpage/')
+@app.route('/hiddenpage')
 def hiddenpage():
     return render_template("hiddenpage.html")
 

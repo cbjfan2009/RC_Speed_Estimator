@@ -1,18 +1,25 @@
-/*head {
-    margin:50;
-    font-family: sans-serif;
-    font-size: 50;
-    }
-*/
-/*#input-box {
-    margin:200;
-    font-family: sans-serif;
-    font-size:15;
+.container {
+    margin:30px;
+    font-family:sans-serif;
+    font-size:15px;
     border:10px solid black;
     }
-h1 {font-size: 80;}
+
+#speed-display {
+    text-align:center;
+    font-size:20px;
+    background-color:lightgrey;
+}
+
+h1 {font-size:30px;
+}
 
 #motor-reference{
-    margin:150;
+    margin:150px;
     }
-    */
+#about-my-slash {
+    background-color:lightgray;
+    border-style:double;
+    font-family:sans-serif;
+    font-size:20px;
+    }
