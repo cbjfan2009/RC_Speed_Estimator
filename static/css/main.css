@@ -1,9 +1,11 @@
-.container {
+/*#input-box {
     margin:30px;
     font-family:sans-serif;
     font-size:15px;
     border:10px solid black;
+    padding:20px;
     }
+
 
 #speed-display {
     text-align:center;
@@ -17,9 +19,18 @@ h1 {font-size:30px;
 #motor-reference{
     margin:150px;
     }
-#about-my-slash {
+*/
+.about-my-slash {
     background-color:lightgray;
     border-style:double;
     font-family:sans-serif;
     font-size:20px;
+    padding-left:20px;
     }
+
+
+.grid-container {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-gap: 20px;
+}
