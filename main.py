@@ -25,6 +25,10 @@ def index():
 def hiddenpage():
     return render_template("hiddenpage.html")
 
+@app.route('/poll')
+def poll():
+    return render_template("poll.html")
+
 
 
 if __name__ == "__main__":
