@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from math import pi
 
+
 app = Flask(__name__)
 
 
@@ -15,7 +16,7 @@ def index():
         user_wheelradius = float(request.form['wheelradius'])
         totalrpm = user_kv * user_batteryVolt
         wheel_circum = 2*pi*user_wheelradius
-        speed = round((totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280)),2)
+        speed = round((totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280)), 2)
         return render_template("index.html", speed_display=speed)
 
     else:
@@ -28,7 +29,6 @@ def hiddenpage():
 @app.route('/poll')
 def poll():
     return render_template("poll.html")
-
 
 
 if __name__ == "__main__":
