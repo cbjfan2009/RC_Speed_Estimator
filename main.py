@@ -1,15 +1,15 @@
 from flask import Flask, render_template, url_for, request, redirect
 from math import pi
-#from flask_sqlalchemy import SQLAlchemy
-#from sqlalchemy.sql import text
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
 
 #set DB for keeping track of motor spec's tested in speed estimator
-#db_name = 'estimator_specs.db'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_name
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-#db = SQLAlchemy(app)
+db_name = 'estimator_specs.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_name
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
 
 
 @app.route("/", methods=['POST', 'GET'])
