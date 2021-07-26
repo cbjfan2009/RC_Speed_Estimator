@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Speed Estimator Data Page</title>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+
+<h1>Estimator User Input Data</h1>
+
+<table id="inventory_table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Motor kV</th>
+                <th>Battery Voltage</th>
+                <th>Pinion Gearing</th>
+                <th>Spur Gearing</th>
+                <th>Differential Gearing</th>
+                <th>Wheel Radius</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for item in data %}
+        <tr>
+            <td> {{ index }}</td>
+            <td> {{ item[0] }}</td>
+            <td> {{ item[1] }}</td>
+            <td> {{ item[2] }}</td>
+            <td> {{ item[3] }}</td>
+            <td> {{ item[4] }}</td>
+            <td> {{ item[5] }}</td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

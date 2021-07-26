@@ -34,7 +34,7 @@ def poll():
 
 @app.route('/estimator_data')
 def estimator_data():
-    return "Not functional, yet!"
+    return render_template("estimator_data.html")
 
 
 if __name__ == "__main__":
