@@ -7,7 +7,7 @@ db = mysql.connector.connect(
    database='webapp_user_input'
    )
 
-dbcursor = db.cursor()
+#dbcursor = db.cursor()
 
 #class users(db.Model):
 #   id = db.Column('user', db.Integer, primary_key = True)
@@ -45,10 +45,16 @@ val = [
 #for x in dbcursor:
 #   print(x)
 
-dbcursor.executemany(sql, val)
+#this will execute the sql data write, but needs commit after
+#dbcursor.executemany(sql, val)
 
 db = db.commit()
 
+
+#def sql_query():
+#   dbcursor = db.cursor()
+#   sql_data = dbcursor.execute('SELECT * FROM speed_estimation_inputs')
+#   return sql_data
 
 
 

@@ -14,7 +14,7 @@ table, th, td {
 
 <h1>Estimator User Input Data</h1>
 
-<table id="inventory_table">
+<table id="user_data">
         <thead>
             <tr>
                 <th>User</th>
@@ -28,7 +28,7 @@ table, th, td {
         </thead>
 
         <tbody>
-        {% for item in data %}
+        {% for item in sql_data %}
         <tr>
             <td> {{ index }}</td>
             <td> {{ item[0] }}</td>
