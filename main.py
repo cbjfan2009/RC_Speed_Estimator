@@ -14,13 +14,9 @@ app = Flask(__name__)
 
 
 def sql_query():
-    with mysql.connector.connect(host='localhost',
-   user='devMatt',
-   password='D3V3l0pm3ntS3rV3rcbjfan2009',
-   database='webapp_user_input') as db:
-        dbcursor = db.cursor()
-        dbcursor.execute('SELECT * FROM speed_estimation_inputs')
-        sql_data = dbcursor.fetchall()
+    dbcursor = db.cursor()
+    dbcursor.execute('SELECT * FROM speed_estimation_inputs')
+    sql_data = dbcursor.fetchall()
     return sql_data
 
 
