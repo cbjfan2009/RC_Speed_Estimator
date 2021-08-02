@@ -4,21 +4,19 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/main.css') }}">
 
-    {% block head %}{% endblock %}
+ {% block head %}{% endblock %}
 </head>
 <body>
-    <div class="container">
-        <h1 class="logo">Radio-Controlled Car and Truck Speed Estimator</h1>
-        <strong><nav>
-          <ul class="menu">
-            <li  style="display:inline;"><a href="{{ url_for('index') }}">Home</a></li>
-            <li  style="display:inline;"><a href="{{ url_for('hiddenpage') }}">About</a></li>
-            <li  style="display:inline;"><a href="{{ url_for('poll') }}">Question of the Day</a></li>
-            <li  style="display:inline;"><a href="{{ url_for('estimator_data') }}">Data</a></li>
-            <li  style="display:inline;"><a href="http://www.google.com">This Page Sucks, Get Me Outta Here!</a></li>
-          </ul>
-        </nav></strong>
-      </div>
+        <h1>Radio-Controlled Car and Truck Speed Estimator</h1>
+
+            <div class="topnav">
+                <a class="active" href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('hiddenpage') }}">About</a>
+                <a href="{{ url_for('poll') }}">Question of the Day</a>
+                <a href="{{ url_for('estimator_data') }}">Estimator Data</a>
+                <a href="http://www.google.com">Get Me Out of Here!</a>
+            </div>
+
     {% block body %} {% endblock %}
 </body>
 </html>
