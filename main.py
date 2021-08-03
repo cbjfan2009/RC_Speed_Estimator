@@ -89,6 +89,10 @@ def index():
 def hiddenpage():
     return render_template("hiddenpage.html")
 
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
 
 @app.route('/poll')
 def poll():
