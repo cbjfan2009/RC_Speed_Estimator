@@ -85,9 +85,6 @@ def index():
         return render_template("index.html")
 
 
-@app.route('/hiddenpage')
-def hiddenpage():
-    return render_template("hiddenpage.html")
 
 @app.route('/about')
 def about():
