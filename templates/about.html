@@ -8,15 +8,47 @@
     list-style-image: url("{{ url_for('static', filename='/bullet_wrench.jpg') }}");
 }
 </style>
+<!-- javascript for image gallery -->
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+
 {% endblock %}
 
 
 {% block body %}
 <div>
-    <body>
         <h1>4x4 RC trucks are an excellent hobby to get involved in.</h1>
         <img src="https://i.ibb.co/9rmKbxT/20201227-134602.jpg" alt="20201227-134602" border="0">
-    </body>
 </div>
 
 <div class="about-my-slash">
@@ -30,7 +62,7 @@
         hobby fresh.  I had toy-grade RCs growing up, but had very little experience tuning and fixing broken RCs.
 
         After breaking a stock A-arm, I dipped my toes into the waters of fix/replace/upgrade maintenance. I upgraded
-        to the <a href="https://traxxas.com/products/parts/3655R" style="font-weight:bold">Heavy-Duty A-arms</a>.<br>  Slowly,
+        to the <a href="https://traxxas.com/products/parts/3655R">Heavy-Duty A-arms</a>.<br>  Slowly,
         I added upgrades like: </p>
     <ul style="padding-left:100px">
         <li>Castle 1415 2400kV brushless paired with Mamba X ESC ----- <a href="https://www.castlecreations.com/en/mamba-x-sct-sensored-25-2v-wp-esc-and-1415-2400kv-combo-010-0160-00">Castle Creations</a></li> <!tabbed-in list item - dd>
@@ -38,15 +70,76 @@
         <li>Traxxas GTR shocks- <a href="https://www.amainhobbies.com/traxxas-gtr-long-hard-anodized-shocks-w-tinitride-shafts-2-tra7461x/p248574">GTR Shocks for front</a>  --------   <a href="https://www.amainhobbies.com/traxxas-gtr-xxlong-hard-anodized-shocks-2-rear-tra7462x/p248575">GTR Shocks for rear</a><br></li>
         <li>Homemade serial XT60 adapter for 4S power</li>
         <li>Zeee 2S LiPO batteries (surprisingly high quality and low cost!) ----- <a href="https://www.amazon.com/Zeee-Batteries-Dean-Style-Connector-Vehicles/dp/B076Z778MJ/ref=asc_df_B076Z778MJ/?tag=hyprod-20&linkCode=df0&hvadid=312111912863&hvpos=&hvnetw=g&hvrand=10673949043635549763&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9014977&hvtargid=pla-571251577875&psc=1">Amazon.com</a></li>
+        <li>Aftermarket body shell from Amazon <a href="https://www.amazon.com/SummitLink-Compatible-Replacement-Included-SS-FS-01/dp/B07F7LSX16/ref=sr_1_17?dchild=1&keywords=slash+4x4+body&qid=1617021995&sr=8-17">Summitlink USA Flag Shell</a>
     </ul>
         <br>
-        <br>
+
     <p>
-        Proline Extended Body Mounts and 2.8 Sand Paw tires for snow and sand bashing, as well as 2.8 Trenchers for beast-mode!
-        <img src="/static/tire_selection.jpg" width="100%">
+        Later, I added Proline Extended Body Mounts to accommodate 2.8" monster truck tires: Pro-Line Sand Paw tires for
+        snow and sand bashing, Pro-Line Trenchers for beast-mode!
     </p>
 </div>
+<h2 style="text-align:center;">
+    Picture Gallery of My Truck
+</h2>
+<!-- Container for the image gallery -->
+<div class="container">
 
-Aftermarket body shell from Amazon <a href="https://www.amazon.com/SummitLink-Compatible-Replacement-Included-SS-FS-01/dp/B07F7LSX16/ref=sr_1_17?dchild=1&keywords=slash+4x4+body&qid=1617021995&sr=8-17"><em>Summitlink USA Flag Shell</em></a><br><br>
-<img src="/static/broken.jpg" width="100%"><br><br>
+  <!-- Full-width images with number text -->
+  <div class="mySlides">
+    <div class="numbertext">1 / 5</div>
+      <img src="/static/broken.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">2 / 5</div>
+      <img src="/static/tire_selection.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">3 / 5</div>
+      <img src="/static/trenchers.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">4 / 5</div>
+      <img src="/static/with_snow_tires.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">5 / 5</div>
+      <img src="/static/guts.jpg" style="width:100%">
+  </div>
+
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+  <!-- Image text -->
+  <div class="caption-container">
+    <p id="caption"></p>
+  </div>
+
+  <!-- Thumbnail images -->
+  <div class="row">
+    <div class="column">
+      <img class="demo" src="/static/broken.jpg" style="width:100%" onclick="currentSlide(1)" alt="Broken A-Arm">
+    </div>
+    <div class="column">
+      <img class="demo" src="/static/tire_selection.jpg" style="width:100%" onclick="currentSlide(2)" alt="Tire and Wheel Selection">
+    </div>
+    <div class="column">
+      <img class="demo" src="/static/trenchers.jpg" style="width:100%" onclick="currentSlide(3)" alt="2.8 Trenchers">
+    </div>
+    <div class="column">
+      <img class="demo" src="/static/with_snow_tires.jpg" style="width:100%" onclick="currentSlide(4)" alt="2.8 Sand Paws">
+    </div>
+    <div class="column">
+      <img class="demo" src="/static/guts.jpg" style="width:100%" onclick="currentSlide(5)" alt="Internal Upgrades">
+    </div>
+  </div>
+</div>
+
+
 {% endblock %}
