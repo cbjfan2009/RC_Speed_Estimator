@@ -35,8 +35,15 @@
         <div class="grid-child">
             <img src="/static/SpeedLimit.jpg">
         </div>
-        <p style="color:red; font-weight: bold" >Please fill out the boxes and click submit to estimate the approximate speed of your vehicle in miles per hour (mph)</p>
-    </div>
+
+        <div class="callout">
+            <div class="callout-header">Please fill out the form to estimate speed.</div>
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <div class="callout-container">
+                <p>Example: 4S Slash 4x4 running 2400kV motor, 16.8V, 16/54 pin/spur, 3.92 reduction from differential.</p>
+            </div>
+</div>
+
 
     <div id="speed-display" style="border: double red; width: 250px; height: 150px; padding: 40px;">
          <p>Calculated Speed</p>
