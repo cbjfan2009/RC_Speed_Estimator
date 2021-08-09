@@ -139,13 +139,19 @@ a {
   opacity: 1;
 }
 
-/* zebra striping for data table in estimator_data.html */
-.odd {
+/* zebra striping for static data table in estimator_data.html */
+/*.odd {
   background-color: #66e0ff;
+}*/
+
+/* zebra striping for sorttable.js dynamic table */
+table.sortable tbody tr:nth-child(2n) td {
+  background: #27e3dd;
 }
+table.sortable tbody tr:nth-child(2n+1) td {
+  background: #ccffff;
 
 /* callout message styling */
-
 .callout {
   position: fixed;
   top: 50%;
@@ -186,3 +192,7 @@ a {
 .closebtn:hover {
   color: lightgrey;
 }
+
+/* sorttable.js formatting */
+.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
+    content: " \25B4\25BE"

@@ -1,21 +1,27 @@
 {% extends "base.html" %}
 
+
 {% block head %}
+
 <title>Speed Estimator Data Page</title>
+
 <style>
 table, th, td {
   border: 1px solid black;
 }
 th {font-weight: bold;}
 </style>
+
+<script src="sorttable.js"></script>
+
 {% endblock %}
+
 
 {% block body %}
 
-
 <h1>Estimator User Input Data</h1>
 
-<table id="user_data">
+<table id="user_data" class="sortable">
         <thead>
             <tr>
                 <th>Motor kV</th>
