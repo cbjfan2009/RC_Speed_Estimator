@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, request
 from math import pi
 # import mysql.connector
 import psycopg2
@@ -40,7 +40,7 @@ def check_connection():
 
 def create_table():
    sql = '''CREATE TABLE estimation_data 
-   ("User" text PRIMARY KEY,
+   (pkid text,
     Motor_kV integer,
      Batt_Volt decimal,
       Pinion integer,
@@ -51,8 +51,8 @@ def create_table():
    pgdb.commit()
 
 
-def pg_add_data(sql,val):
-   pgcursor.executemany(sql, val)
+def pg_add_data(sql, val):
+   pgcursor.execute(sql, val)
    pgdb.commit()
 
 
@@ -79,11 +79,15 @@ def index():
         totalrpm = user_kv * user_batteryVolt
         wheel_circum = 2*pi*user_wheelradius
         speed = round((totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280)), 2)
+        x = '''INSERT INTO estimation_data 
+            (Motor_kV, Batt_Volt, Pinion, Spur, Final_Ratio, Wheel_Rad)
+            VALUES (%s, %s, %s, %s, %s, %s);'''
+        y = (user_kv, user_batteryVolt, user_pinion, user_spur, user_fgr, user_wheelradius)
+        pg_add_data(x, y)
         return render_template("index.html", speed_display=speed)
 
     else:
         return render_template("index.html")
-
 
 
 @app.route('/about')

@@ -81,7 +81,8 @@ def check_connection():
 
 def create_table():
    sql = '''CREATE TABLE estimation_data 
-   ("User" text PRIMARY KEY,
+   (pkid text PRIMARY KEY,
+   visitor text,
     Motor_kV integer,
      Batt_Volt decimal,
       Pinion integer,
@@ -109,16 +110,16 @@ def pg_query():
 
 
 pgsql = '''INSERT INTO estimation_data 
-   ("User", Motor_kV, Batt_Volt, Pinion, Spur, Final_Ratio, Wheel_Rad)
+   (visitor, Motor_kV, Batt_Volt, Pinion, Spur, Final_Ratio, Wheel_Rad)
    VALUES (%s, %s, %s, %s, %s, %s, %s);'''
 pgval = [
-      ('204.210.165.130', 4000, 16.8, 14, 50, 3.75, 2.25),
-      ('204.210.165.126', 1800, 22.2, 18, 52, 4.0, 2.75),
-      ('204.210.165.155', 3500, 8.4, 13, 54, 3.92, 2.0),
-      ('204.210.165.230', 1000, 29.6, 18, 52, 3.75, 3.0),
-      ('204.210.170.126', 800, 29.6, 18, 52, 4.0, 3.2),
+      ('206.210.165.130', 4000, 16.8, 14, 50, 3.75, 2.25),
+      ('207.210.165.126', 1800, 22.2, 18, 52, 4.0, 2.75),
+      ('208.210.165.155', 3500, 8.4, 13, 54, 3.92, 2.0),
+      ('209.210.165.230', 1000, 29.6, 18, 52, 3.75, 3.0),
+      ('210.210.170.126', 800, 29.6, 18, 52, 4.0, 3.2),
       ]
 
 pg_add_data(pgsql, pgval)
 
-pgdb.close()
+#pgdb.close()

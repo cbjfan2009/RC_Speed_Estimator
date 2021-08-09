@@ -4,6 +4,9 @@
 a {
     font-weight:bold;
     }
+.user_input {
+    background-color:#ff8080;
+}
 
 .topnav {
   background-color: #333;
