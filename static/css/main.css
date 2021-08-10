@@ -141,8 +141,9 @@ a {
 
 /* zebra striping for static data table in estimator_data.html */
 /*.odd {
-  background-color: #66e0ff;
-}*/
+  background-color: #66e0ff;} */
+
+
 
 /* zebra striping for sorttable.js dynamic table */
 table.sortable tbody tr:nth-child(2n) td {
