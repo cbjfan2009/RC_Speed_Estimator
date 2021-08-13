@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from math import pi
-import psycopg2
-from sqlalchemy import create_engine, Table, Column, Integer, String, DECIMAL, MetaData
+# import psycopg2
+from sqlalchemy import create_engine, Column, Integer, String, DECIMAL, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -24,25 +24,25 @@ from sqlalchemy.orm import sessionmaker
 
 
 # ------------------postgresql connection -- if PostgreSQL is going to be used, like with Heroku!-----------------------
-#import psycopg2
+# import psycopg2
 # postgres://vlinujzpemehpy:81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e@ec2-54-211-160-34.compute-1.amazonaws.com:5432/df5p5d20v6pbf9
-#pgdb = psycopg2.connect(
+# pgdb = psycopg2.connect(
 #   host='ec2-54-211-160-34.compute-1.amazonaws.com',
 #   user='vlinujzpemehpy',
 #   password='81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e',
 #   port='5432',
 #   database='df5p5d20v6pbf9'
 #   )
-#pgcursor = pgdb.cursor()
+# pgcursor = pgdb.cursor()
 
 
-#def check_connection():
+# def check_connection():
 #   pgcursor.execute("select version()")
 #   data = pgcursor.fetchone()
 #   print("Connection established to: ", data)
 
 
-#def create_table():
+# def create_table():
 #   sql = '''CREATE TABLE estimation_data
 #   (pkid text,
 #    Motor_kV integer,
@@ -55,22 +55,24 @@ from sqlalchemy.orm import sessionmaker
 #   pgdb.commit()
 
 
-#def pg_add_data(sql, val):
+# def pg_add_data(sql, val):
 #   pgcursor.execute(sql, val)
 #   pgdb.commit()
 
 
-#def pg_query():
+# def pg_query():
 #    pgcursor.execute('SELECT * FROM estimation_data')
 #    sql_data = pgcursor.fetchall()
 #    return sql_data
 
 
-
 # -------------------------------------SQLAlchemy approach-----------------------------------------------
 db_string = "postgresql://vlinujzpemehpy:81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e@ec2-54-211-160-34.compute-1.amazonaws.com:5432/df5p5d20v6pbf9"
+
 db = create_engine(db_string, echo=True)
+
 meta = MetaData()
+
 base = declarative_base()
 
 
@@ -78,24 +80,26 @@ class Visitors(base):
     __tablename__ = 'estimation_data'
 
     pkid = Column(String, primary_key=True)
-    motor_kV = Column(Integer)
-    batt_Volt = Column(DECIMAL)
+    motor_kv = Column(Integer)
+    batt_volt = Column(DECIMAL)
     pinion = Column(Integer)
     spur = Column(Integer)
     fgr = Column(DECIMAL)
     wheel_rad = Column(DECIMAL)
 
+
 Session = sessionmaker(db)
+
 session = Session()
 
 base.metadata.create_all(db)
 
 
-#---------------------sample code for CRUD not formatted to work on my db yet------------------------------------------
+# ---------------------sample code for CRUD not formatted to work on my db yet------------------------------------------
 # Create
-new_visitor = Visitors(motor_kV=a, batt_Volt=b, pinion=c, spur=d, fgr=e, wheel_rad=f)
-session.add(new_visitor)
-session.commit()
+# new_visitor = Visitors(motor_kV=a, batt_Volt=b, pinion=c, spur=d, fgr=e, wheel_rad=f)
+# session.add(new_visitor)
+# session.commit()
 
 # Read
 visitors = session.query(Visitors)
@@ -103,13 +107,13 @@ for visitor in visitors:
     print(Visitors.batt_Volt)
 
 # Update
-#new_visitor.batt_Volt = "33.3"
-#session.commit()
+# new_visitor.batt_Volt = "33.3"
+# session.commit()
 
 # Delete
-#session.delete(new_visitor)
-#session.commit()
-#------------------------------------------------end sample code---------------------
+# session.delete(new_visitor)
+# session.commit()
+# ------------------------------------------------end sample code---------------------
 
 
 app = Flask(__name__)
@@ -130,8 +134,11 @@ def index():
         wheel_circum = 2*pi*user_wheelradius
         speed = round((totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280)), 2)
         a = user_kv, b = user_batteryVolt,c = user_pinion, d = user_spur, e = user_fgr, f = user_wheelradius
-        #pg_add_data(x, y)
-        return render_template("index.html", speed_display=speed), a, b, c, d, e, f
+        new_visitor = Visitors(motor_kV=a, batt_Volt=b, pinion=c, spur=d, fgr=e, wheel_rad=f)
+        session.add(new_visitor)
+        session.commit()
+
+        return render_template("index.html", speed_display=speed)
 
     else:
         return render_template("index.html")
@@ -151,15 +158,15 @@ def poll():
 def estimator_data():
     try:
         result_set = db.execute("SELECT * FROM estimation_data")
-
-       #----postgres-----
+       # ----postgres-----
        # check_connection()
        # pgdata = pg_query()
         return render_template("estimator_data.html", sql_data=result_set)
+
     except:
         return "Something went wrong with the database connection!"
-    #sqldata = sql_query() <--if using mysql
-    #return render_template("estimator_data.html", sql_data=sqldata)
+    # sqldata = sql_query() <--if using mysql
+    # return render_template("estimator_data.html", sql_data=sqldata)
 
 
 if __name__ == "__main__":
