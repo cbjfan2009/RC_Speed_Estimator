@@ -129,12 +129,9 @@ def index():
         totalrpm = user_kv * user_batteryVolt
         wheel_circum = 2*pi*user_wheelradius
         speed = round((totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280)), 2)
-        x = '''INSERT INTO estimation_data 
-            (Motor_kV, Batt_Volt, Pinion, Spur, Final_Ratio, Wheel_Rad)
-            VALUES (%s, %s, %s, %s, %s, %s);'''
-        y = (user_kv, user_batteryVolt, user_pinion, user_spur, user_fgr, user_wheelradius)
+        a = user_kv, b = user_batteryVolt,c = user_pinion, d = user_spur, e = user_fgr, f = user_wheelradius
         #pg_add_data(x, y)
-        return render_template("index.html", speed_display=speed)
+        return render_template("index.html", speed_display=speed), a, b, c, d, e, f
 
     else:
         return render_template("index.html")
