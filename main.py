@@ -93,22 +93,22 @@ base.metadata.create_all(db)
 
 #---------------------sample code for CRUD not formatted to work on my db yet------------------------------------------
 # Create
-doctor_strange = Film(title="Doctor Strange", director="Scott Derrickson", year="2016")
-session.add(doctor_strange)
+new_visitor = Visitors(motor_kV=a, batt_Volt=b, pinion=c, spur=d, fgr=e, wheel_rad=f)
+session.add(new_visitor)
 session.commit()
 
 # Read
-films = session.query(Film)
-for film in films:
-    print(film.title)
+visitors = session.query(Visitors)
+for visitor in visitors:
+    print(Visitors.batt_Volt)
 
 # Update
-doctor_strange.title = "Some2016Film"
-session.commit()
+#new_visitor.batt_Volt = "33.3"
+#session.commit()
 
 # Delete
-session.delete(doctor_strange)
-session.commit()
+#session.delete(new_visitor)
+#session.commit()
 #------------------------------------------------end sample code---------------------
 
 
