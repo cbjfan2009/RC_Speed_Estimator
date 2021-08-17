@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from math import pi
 # import psycopg2
-from sqlalchemy import create_engine, Column, Integer, String, DECIMAL, MetaData
+from sqlalchemy import create_engine, Column, Integer, String, Numeric, MetaData, select
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -80,12 +80,22 @@ class Visitors(base):
     __tablename__ = 'estimation_data'
 
     pkid = Column(String, primary_key=True)
-    motor_kv = Column(Integer)
-    batt_volt = Column(DECIMAL)
-    pinion = Column(Integer)
-    spur = Column(Integer)
-    fgr = Column(DECIMAL)
-    wheel_rad = Column(DECIMAL)
+    motor_kv = Column('motor_kv', Integer)
+    batt_volt = Column('batt_volt', Numeric)
+    pinion = Column('pinion', Integer)
+    spur = Column('spur', Integer)
+    final_ratio = Column('final_ratio', Numeric)
+    wheel_rad = Column('wheel_rad', Numeric)
+
+    def __init__(self, pkid, motor_kv, batt_volt, pinion, spur, final_ratio, wheel_rad):
+        self.pkid = pkid
+        self.motor_kv = motor_kv
+        self.batt_volt = batt_volt
+        self.pinion = pinion
+        self.spur = spur
+        self.final_ratio = final_ratio
+        self.wheel_rad = wheel_rad
+
 
 
 Session = sessionmaker(db)
@@ -102,9 +112,9 @@ base.metadata.create_all(db)
 # session.commit()
 
 # Read
-visitors = session.query(Visitors)
-for visitor in visitors:
-    print(Visitors.batt_Volt)
+# visitors = session.query(Visitors)
+# for visitor in visitors:
+#    print(Visitors.batt_volt)
 
 # Update
 # new_visitor.batt_Volt = "33.3"
@@ -125,16 +135,16 @@ app = Flask(__name__)
 def index():
     if request.method == 'POST':
         user_kv = int(request.form['motorkV'])
-        user_batteryVolt = float(request.form['battVolt'])
+        user_batteryvolt = float(request.form['battVolt'])
         user_pinion = int(request.form['pinion'])
         user_spur = int(request.form['spur'])
         user_fgr = float(request.form['fgr'])
         user_wheelradius = float(request.form['wheelradius'])
-        totalrpm = user_kv * user_batteryVolt
+        totalrpm = user_kv * user_batteryvolt
         wheel_circum = 2*pi*user_wheelradius
         speed = round((totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280)), 2)
-        a = user_kv, b = user_batteryVolt,c = user_pinion, d = user_spur, e = user_fgr, f = user_wheelradius
-        new_visitor = Visitors(motor_kV=a, batt_Volt=b, pinion=c, spur=d, fgr=e, wheel_rad=f)
+        new_visitor = Visitors(motor_kv=user_kv, batt_volt=user_batteryvolt, pinion=user_pinion, spur=user_spur,
+                               final_ratio=user_fgr, wheel_rad=user_wheelradius)
         session.add(new_visitor)
         session.commit()
 
@@ -157,7 +167,11 @@ def poll():
 @app.route('/estimator_data', methods=['POST', 'GET'])
 def estimator_data():
     try:
-        result_set = db.execute("SELECT * FROM estimation_data")
+        result_set = session.query(Visitors)
+        for row in result_set:
+            print(row)
+
+       # result_set = db.execute("SELECT * FROM estimation_data")
        # ----postgres-----
        # check_connection()
        # pgdata = pg_query()
