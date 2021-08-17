@@ -79,7 +79,7 @@ base = declarative_base()
 class Visitors(base):
     __tablename__ = 'estimation_data'
 
-    pkid = Column(String, primary_key=True)
+    pkid = Column(String, primary_key=True, autoincrement=True)
     motor_kv = Column('motor_kv', Integer)
     batt_volt = Column('batt_volt', Numeric)
     pinion = Column('pinion', Integer)
@@ -167,15 +167,15 @@ def poll():
 @app.route('/estimator_data', methods=['POST', 'GET'])
 def estimator_data():
     try:
-        result_set = session.query(Visitors)
-        for row in result_set:
-            print(row)
+        data = session.query(Visitors).all()
+        # for row in data:
+        #    print(f'Visitors used the following settings: voltage - {row.batt_volt} , motor size - {row.motor_kv}')
 
        # result_set = db.execute("SELECT * FROM estimation_data")
        # ----postgres-----
        # check_connection()
        # pgdata = pg_query()
-        return render_template("estimator_data.html", sql_data=result_set)
+        return render_template("estimator_data.html", sql_data=data)
 
     except:
         return "Something went wrong with the database connection!"

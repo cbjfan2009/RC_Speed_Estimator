@@ -42,12 +42,12 @@ th {font-weight: bold;}
         <tbody>
         {% for item in sql_data %}
         <tr class="{{ loop.cycle('odd', 'even') }}">
-            <td> {{ item[1] }}</td>
-            <td> {{ item[2] }}</td>
-            <td> {{ item[3] }}</td>
-            <td> {{ item[4] }}</td>
-            <td> {{ item[5] }}</td>
-            <td> {{ item[6] }}</td>
+            <td> {{ item.motor_kv }}</td>
+            <td> {{ item.batt_volt }}</td>
+            <td> {{ item.pinion }}</td>
+            <td> {{ item.spur }}</td>
+            <td> {{ item.final_ratio }}</td>
+            <td> {{ item.wheel_rad }}</td>
         </tr>
         {% endfor %}
         </tbody>
