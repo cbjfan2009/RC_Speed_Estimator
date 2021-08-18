@@ -79,7 +79,7 @@ base = declarative_base()
 class Visitors(base):
     __tablename__ = 'estimation_data'
 
-    pkid = Column(String, primary_key=True, autoincrement=True)
+    pkid = Column(Integer, primary_key=True, autoincrement=True)
     motor_kv = Column('motor_kv', Integer)
     batt_volt = Column('batt_volt', Numeric)
     pinion = Column('pinion', Integer)
@@ -88,7 +88,7 @@ class Visitors(base):
     wheel_rad = Column('wheel_rad', Numeric)
 
     def __init__(self, pkid, motor_kv, batt_volt, pinion, spur, final_ratio, wheel_rad):
-        self.pkid = pkid
+
         self.motor_kv = motor_kv
         self.batt_volt = batt_volt
         self.pinion = pinion
@@ -143,7 +143,7 @@ def index():
         totalrpm = user_kv * user_batteryvolt
         wheel_circum = 2*pi*user_wheelradius
         speed = round((totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280)), 2)
-        new_visitor = Visitors(motor_kv=user_kv, batt_volt=user_batteryvolt, pinion=user_pinion, spur=user_spur,
+        new_visitor = Visitors(pkid=None, motor_kv=user_kv, batt_volt=user_batteryvolt, pinion=user_pinion, spur=user_spur,
                                final_ratio=user_fgr, wheel_rad=user_wheelradius)
         session.add(new_visitor)
         session.commit()
@@ -167,20 +167,11 @@ def poll():
 @app.route('/estimator_data', methods=['POST', 'GET'])
 def estimator_data():
     try:
-        data = session.query(Visitors).all()
-        # for row in data:
-        #    print(f'Visitors used the following settings: voltage - {row.batt_volt} , motor size - {row.motor_kv}')
-
-       # result_set = db.execute("SELECT * FROM estimation_data")
-       # ----postgres-----
-       # check_connection()
-       # pgdata = pg_query()
-        return render_template("estimator_data.html", sql_data=data)
+        return render_template("estimator_data.html", sql_data=session.query(Visitors).all())
 
     except:
         return "Something went wrong with the database connection!"
-    # sqldata = sql_query() <--if using mysql
-    # return render_template("estimator_data.html", sql_data=sqldata)
+
 
 
 if __name__ == "__main__":
