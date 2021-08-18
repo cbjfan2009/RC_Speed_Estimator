@@ -145,11 +145,6 @@ a {
   opacity: 1;
 }
 
-/* zebra striping for static data table in estimator_data.html */
-/*.odd {
-  background-color: #66e0ff;} */
-
-
 
 /* zebra striping for sorttable.js dynamic table */
 table.sortable tbody tr:nth-child(2n) td {
@@ -158,7 +153,3 @@ table.sortable tbody tr:nth-child(2n) td {
 table.sortable tbody tr:nth-child(2n+1) td {
   background: #ccffff;
 
-
-/* sorttable.js formatting */
-/*.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
-    content: " \25B4\25BE" */
