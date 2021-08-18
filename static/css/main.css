@@ -34,6 +34,12 @@ a {
   background-color: #ddd;
   color: black;
 }
+.calculated {
+    font-size:35px;
+    font-weight: bold;
+    color:red;
+    text-align: center;
+    }
 
 .about-my-slash {
     background-color:lightgray;
@@ -152,48 +158,7 @@ table.sortable tbody tr:nth-child(2n) td {
 table.sortable tbody tr:nth-child(2n+1) td {
   background: #ccffff;
 
-/* callout message styling */
-.callout {
-  position: fixed;
-  top: 50%;
-  left: 10%;
-  margin-left: 20px;
-  max-width: 350px;
-  border:3px solid red;
-}
-
-/* Callout header */
-.callout-header {
-  padding: 25px 15px;
-  text-align:justify;
-  background: #555;
-  font-size: 30px;
-  color: white;
-}
-
-/* Callout container/body */
-.callout-container {
-  padding: 15px;
-  background-color: black;
-  color: white;
-  text-align:justify;
-}
-
-/* Close button */
-.closebtn {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-
-/* Change color on mouse-over */
-.closebtn:hover {
-  color: lightgrey;
-}
 
 /* sorttable.js formatting */
-.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
-    content: " \25B4\25BE"
+/*.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
+    content: " \25B4\25BE" */

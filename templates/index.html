@@ -36,19 +36,12 @@
             <img src="/static/SpeedLimit.jpg">
         </div>
 
-        <div class="callout">
-            <div class="callout-header">Please fill out the form to estimate speed.</div>
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <div class="callout-container">
-                <p>Example: 4S Slash 4x4 running 2400kV motor, 16.8V, 16/54 pin/spur, 3.92 reduction from differential.</p>
-            </div>
-</div>
 
 
-    <div id="speed-display" style="border: double red; width: 250px; height: 150px; padding: 40px;">
-         <p>Calculated Speed</p>
+    <div id="speed-display" style="border: double red; width: 250px; height: 150px;">
+         <p style="text-align: center; vertical-align: top;">Calculated Speed</p>
 
-         <p style="font-size:35px; color:red;">{{ speed_display }}</p>
+         <p class="calculated">{{ speed_display }}</p>
 
     </div>
 
