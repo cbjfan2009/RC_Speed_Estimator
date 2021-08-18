@@ -87,7 +87,7 @@ class Visitors(base):
     final_ratio = Column('final_ratio', Numeric)
     wheel_rad = Column('wheel_rad', Numeric)
 
-    def __init__(self, pkid, motor_kv, batt_volt, pinion, spur, final_ratio, wheel_rad):
+    def __init__(self, motor_kv, batt_volt, pinion, spur, final_ratio, wheel_rad):
 
         self.motor_kv = motor_kv
         self.batt_volt = batt_volt
@@ -143,7 +143,7 @@ def index():
         totalrpm = user_kv * user_batteryvolt
         wheel_circum = 2*pi*user_wheelradius
         speed = round((totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280)), 2)
-        new_visitor = Visitors(pkid=None, motor_kv=user_kv, batt_volt=user_batteryvolt, pinion=user_pinion, spur=user_spur,
+        new_visitor = Visitors(motor_kv=user_kv, batt_volt=user_batteryvolt, pinion=user_pinion, spur=user_spur,
                                final_ratio=user_fgr, wheel_rad=user_wheelradius)
         session.add(new_visitor)
         session.commit()
