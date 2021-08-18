@@ -1,5 +1,8 @@
 /*Ctr + F5 to hard refresh in Chrome to see different changes to CSS!!!
 /* Add a black background color to the top navigation */
+html * {
+    font-family: Arial, Helvetica, sans-serif;
+    }
 
 a {
     font-weight:bold;
