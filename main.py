@@ -85,8 +85,9 @@ class Visitors(base):
     spur = Column('spur', Integer)
     final_ratio = Column('final_ratio', Numeric)
     wheel_rad = Column('wheel_rad', Numeric)
+    speed_output = Column('speed_output', Numeric)
 
-    def __init__(self, motor_kv, batt_volt, pinion, spur, final_ratio, wheel_rad):
+    def __init__(self, motor_kv, batt_volt, pinion, spur, final_ratio, wheel_rad, speed_output):
 
         self.motor_kv = motor_kv
         self.batt_volt = batt_volt
@@ -94,6 +95,7 @@ class Visitors(base):
         self.spur = spur
         self.final_ratio = final_ratio
         self.wheel_rad = wheel_rad
+        self.speed_output = speed_output
 
 
 
@@ -102,27 +104,6 @@ Session = sessionmaker(db)
 session = Session()
 
 base.metadata.create_all(db)
-
-
-# ---------------------sample code for CRUD not formatted to work on my db yet------------------------------------------
-# Create
-# new_visitor = Visitors(motor_kV=a, batt_Volt=b, pinion=c, spur=d, fgr=e, wheel_rad=f)
-# session.add(new_visitor)
-# session.commit()
-
-# Read
-# visitors = session.query(Visitors)
-# for visitor in visitors:
-#    print(Visitors.batt_volt)
-
-# Update
-# new_visitor.batt_Volt = "33.3"
-# session.commit()
-
-# Delete
-# session.delete(new_visitor)
-# session.commit()
-# ------------------------------------------------end sample code---------------------
 
 
 app = Flask(__name__)
@@ -143,7 +124,7 @@ def index():
         wheel_circum = 2*pi*user_wheelradius
         speed = round((totalrpm / ((user_spur / user_pinion) * user_fgr) * (wheel_circum/12) * (60 / 5280)), 2)
         new_visitor = Visitors(motor_kv=user_kv, batt_volt=user_batteryvolt, pinion=user_pinion, spur=user_spur,
-                               final_ratio=user_fgr, wheel_rad=user_wheelradius)
+                               final_ratio=user_fgr, wheel_rad=user_wheelradius, speed_output=speed)
         session.add(new_visitor)
         session.commit()
 
