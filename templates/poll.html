@@ -9,7 +9,55 @@
 
 <div>
     <h1>Daily RC Question</h1>
+</div>
+<div style="height:200px; width:250px; margin-left: auto; margin-right: auto;">
+    <h2 >Today's question is:</h2>
+    <div>
+        <form action="/poll" method="POST" name="poll">
+            <p>What is your favorite brand of RC 4x4s?</p>
+
+            <!-- If I try using lists -- <div style="text-align:left;">
+                <input type="radio" id="0" name="poll" value="Arrma">
+                <label for="0">Arrma</label><br>
+
+                <input type="radio" id="1" name="poll" value="Traxxas">
+                <label for="1">Traxxas</label><br>
+
+                <input type="radio" id="2" name="poll" value="Axial">
+                <label for="2">Axial</label><br>
+
+                <input type="radio" id="3" name="poll" value="Mugen">
+                <label for="3">Mugen</label><br>
+
+                <input type="radio" id="4" name="poll" value="Kyosho">
+                <label for="4">Kyosho</label><br>
+
+                <input type="radio" id="5" name="poll" value="Losi">
+                <label for="5">Losi</label><br> -->
+
+            <div style="text-align:left;">
+                <input type="radio" id="Arrma" name="poll" value="Arrma">
+                <label for="Arrma">Arrma</label><br>
+
+                <input type="radio" id="Traxxas" name="poll" value="Traxxas">
+                <label for="Traxxas">Traxxas</label><br>
+
+                <input type="radio" id="Axial" name="poll" value="Axial">
+                <label for="Axial">Axial</label><br>
+
+                <input type="radio" id="Mugen" name="poll" value="Mugen">
+                <label for="Mugen">Mugen</label><br>
+
+                <input type="radio" id="Kyosho" name="poll" value="Kyosho">
+                <label for="Kyosho">Kyosho</label><br>
+
+                <input type="radio" id="Losi" name="poll" value="Losi">
+                <label for="Losi">Losi</label><br>
+
+                <input type="submit" value="Submit Your Response!">
+            </div>
+        </form>
+    </div>
 
 </div>
-
 {% endblock %}

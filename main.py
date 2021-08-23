@@ -98,7 +98,6 @@ class Visitors(base):
         self.speed_output = speed_output
 
 
-
 Session = sessionmaker(db)
 
 session = Session()
@@ -139,8 +138,16 @@ def about():
     return render_template("about.html")
 
 
-@app.route('/poll')
+@app.route('/poll', methods=['POST', 'GET'])
 def poll():
+    if request.method == 'POST':
+        poll_dict = {"Arrma": 0, "Traxxas": 0, "Axial": 0, "Mugen": 0, "Kyosho": 0, "Losi": 0}
+        # poll_list = [("Arrma", 0), ("Traxxas", 0), ("Axial", 0), ("Mugen", 0), ("Kyosho", 0), ("Losi", 0)]
+        # response = request.form['poll']
+        # val_to_update = poll_list[response][1]
+        # print((poll_list))
+        # print(val_to_update)
+
     return render_template("poll.html")
 
 
@@ -151,7 +158,6 @@ def estimator_data():
 
     except:
         return "Something went wrong with the database connection!"
-
 
 
 if __name__ == "__main__":
