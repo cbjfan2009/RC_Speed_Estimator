@@ -1,25 +1,8 @@
 from flask import Flask, render_template, request
 from math import pi
-from sqlalchemy import create_engine, Column, Integer, Numeric, MetaData
+from sqlalchemy import create_engine, Column, Integer, Numeric, MetaData, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
-# ---------------------------------mysql connection -- if MySQL server is going to be used-----------------------------
-
-# import mysql.connector
-# sqldb = mysql.connector.connect(
-#   host='localhost',
-#   user='devMatt',
-#   password='D3V3l0pm3ntS3rV3rcbjfan2009',
-#   database='webapp_user_input'
-#   )
-
-# mysql query
-# def sql_query():
-#    dbcursor = sqldb.cursor()
-#    dbcursor.execute('SELECT * FROM speed_estimation_inputs')
-#    sql_data = dbcursor.fetchall()
-#    return sql_data
 
 
 # ------------------postgresql connection -- if PostgreSQL is going to be used, like with Heroku!-----------------------
@@ -33,36 +16,6 @@ from sqlalchemy.orm import sessionmaker
 #   database='df5p5d20v6pbf9'
 #   )
 # pgcursor = pgdb.cursor()
-
-
-# def check_connection():
-#   pgcursor.execute("select version()")
-#   data = pgcursor.fetchone()
-#   print("Connection established to: ", data)
-
-
-# def create_table():
-#   sql = '''CREATE TABLE estimation_data
-#   (pkid text,
-#    Motor_kV integer,
-#     Batt_Volt decimal,
-#      Pinion integer,
-#       Spur integer,
-#        Final_Ratio decimal,
-#         Wheel_Rad decimal);'''
-#   pgcursor.execute(sql)
-#   pgdb.commit()
-
-
-# def pg_add_data(sql, val):
-#   pgcursor.execute(sql, val)
-#   pgdb.commit()
-
-
-# def pg_query():
-#    pgcursor.execute('SELECT * FROM estimation_data')
-#    sql_data = pgcursor.fetchall()
-#    return sql_data
 
 
 # -------------------------------------SQLAlchemy approach-----------------------------------------------
@@ -96,6 +49,17 @@ class Visitors(base):
         self.final_ratio = final_ratio
         self.wheel_rad = wheel_rad
         self.speed_output = speed_output
+
+class Poll_response(base):
+    __tablename__ = 'poll_response'
+
+    response = Column('response', String, primary_key=True)
+    count = Column('count', Integer)
+
+    def __init__(self, response, count):
+        self.response = response
+        self.count = count
+
 
 
 Session = sessionmaker(db)
@@ -138,15 +102,16 @@ def about():
     return render_template("about.html")
 
 
+poll_dict = {"Arrma": 0, "Traxxas": 0, "Axial": 0, "Mugen": 0, "Kyosho": 0, "Losi": 0}
+
+
 @app.route('/poll', methods=['POST', 'GET'])
 def poll():
     if request.method == 'POST':
-        poll_dict = {"Arrma": 0, "Traxxas": 0, "Axial": 0, "Mugen": 0, "Kyosho": 0, "Losi": 0}
-        # poll_list = [("Arrma", 0), ("Traxxas", 0), ("Axial", 0), ("Mugen", 0), ("Kyosho", 0), ("Losi", 0)]
-        # response = request.form['poll']
-        # val_to_update = poll_list[response][1]
-        # print((poll_list))
-        # print(val_to_update)
+        response = request.form['poll']
+        session.query(Poll_response).filter(Poll_response.response == response).update({Poll_response.count:
+                                                                                            Poll_response.count + 1})
+        session.commit()
 
     return render_template("poll.html")
 
