@@ -10,12 +10,12 @@
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
-{% for k, v in poll_response_dict %}
+{% for k, v in poll_data_dict.items() %}
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
           ['Brand', 'Votes'],
-          ['{{k}}',     {{v}}],
+          ['{{k}}', '{{v}}'],
         ]);
 {% endfor %}
 

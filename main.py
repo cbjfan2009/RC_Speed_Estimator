@@ -122,7 +122,7 @@ def poll():
         session.commit()
 
 
-    return render_template("poll.html", poll_data=poll_data)
+    return render_template("poll.html", poll_data=poll_data, poll_data_dict=poll_data_dict)
 
 
 @app.route('/estimator_data', methods=['POST', 'GET'])
