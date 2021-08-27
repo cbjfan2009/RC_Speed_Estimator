@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, json
 from math import pi
 from sqlalchemy import create_engine, Column, Integer, Numeric, MetaData, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
 
 # ------------------postgresql connection -- if PostgreSQL is going to be used, like with Heroku!-----------------------
 # import psycopg2
@@ -19,7 +18,8 @@ from sqlalchemy.orm import sessionmaker
 
 
 # -------------------------------------SQLAlchemy approach-----------------------------------------------
-db_string = "postgresql://vlinujzpemehpy:81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e@ec2-54-211-160-34.compute-1.amazonaws.com:5432/df5p5d20v6pbf9"
+db_string = "postgresql://vlinujzpemehpy:81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e@ec2-54-211-" \
+            "160-34.compute-1.amazonaws.com:5432/df5p5d20v6pbf9"
 
 db = create_engine(db_string, echo=True)
 
@@ -50,6 +50,7 @@ class Visitors(base):
         self.wheel_rad = wheel_rad
         self.speed_output = speed_output
 
+
 class Poll_response(base):
     __tablename__ = 'poll_response'
 
@@ -59,7 +60,6 @@ class Poll_response(base):
     def __init__(self, response, count):
         self.response = response
         self.count = count
-
 
 
 Session = sessionmaker(db)
@@ -102,18 +102,27 @@ def about():
     return render_template("about.html")
 
 
-poll_dict = {"Arrma": 0, "Traxxas": 0, "Axial": 0, "Mugen": 0, "Kyosho": 0, "Losi": 0}
+# NEED TO MAKE poll_data into A DICTIONARY????
+poll_data = session.query(Poll_response).all()
+poll_data_dict = {}
+
+for item in poll_data:
+    poll_data_dict.update({item.response: item.count})
+
+jsoned_data = json.dumps(poll_data_dict)
 
 
 @app.route('/poll', methods=['POST', 'GET'])
 def poll():
     if request.method == 'POST':
         response = request.form['poll']
-        session.query(Poll_response).filter(Poll_response.response == response).update({Poll_response.count:
-                                                                                            Poll_response.count + 1})
+        session.query(Poll_response).filter(Poll_response.response == response).update(
+            {Poll_response.count: Poll_response.count + 1}
+        )
         session.commit()
 
-    return render_template("poll.html")
+
+    return render_template("poll.html", poll_data=poll_data)
 
 
 @app.route('/estimator_data', methods=['POST', 'GET'])

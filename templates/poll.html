@@ -2,6 +2,35 @@
 
 {% block head %}
 <title>Polling Page</title>
+
+
+{% block javascript %}
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+{% for k, v in poll_response_dict %}
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Brand', 'Votes'],
+          ['{{k}}',     {{v}}],
+        ]);
+{% endfor %}
+
+        var options = {
+          title: 'Votes by Brand'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+{% endblock %}
+
 {% endblock %}
 
 
@@ -49,5 +78,7 @@
             </thead>
         </table>
     </div>
+
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
 </div>
 {% endblock %}
