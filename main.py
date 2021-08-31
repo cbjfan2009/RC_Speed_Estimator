@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, json
 from math import pi
+import matplotlib.pyplot as plt
+import numpy as np
 from sqlalchemy import create_engine, Column, Integer, Numeric, MetaData, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from PIL import Image
 
 # ------------------postgresql connection -- if PostgreSQL is going to be used, like with Heroku!-----------------------
 # import psycopg2
@@ -18,6 +21,9 @@ from sqlalchemy.orm import sessionmaker
 
 
 # -------------------------------------SQLAlchemy approach-----------------------------------------------
+
+app = Flask(__name__)
+
 db_string = "postgresql://vlinujzpemehpy:81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e@ec2-54-211-" \
             "160-34.compute-1.amazonaws.com:5432/df5p5d20v6pbf9"
 
@@ -69,9 +75,6 @@ session = Session()
 base.metadata.create_all(db)
 
 
-app = Flask(__name__)
-
-
 # Routing for HTML
 
 @app.route("/", methods=['POST', 'GET'])
@@ -102,25 +105,18 @@ def about():
     return render_template("about.html")
 
 
-# NEED TO MAKE poll_data into A DICTIONARY????
-poll_data = session.query(Poll_response).all()
-poll_data_dict = {}
-
-for item in poll_data:
-    poll_data_dict.update({item.response: item.count})
-
-jsoned_data = json.dumps(poll_data_dict)
-
-
 @app.route('/poll', methods=['POST', 'GET'])
 def poll():
+    poll_data = session.query(Poll_response).all()
+    poll_data_dict = {}
+    for item in poll_data:
+        poll_data_dict.update({item.response: item.count})
     if request.method == 'POST':
         response = request.form['poll']
         session.query(Poll_response).filter(Poll_response.response == response).update(
             {Poll_response.count: Poll_response.count + 1}
         )
         session.commit()
-
 
     return render_template("poll.html", poll_data=poll_data, poll_data_dict=poll_data_dict)
 

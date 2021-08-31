@@ -3,36 +3,6 @@
 {% block head %}
 <title>Polling Page</title>
 
-
-{% block javascript %}
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-       var numbers = {{poll_data_dict | tojson | safe}};
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-        {% for k, v in poll_data_dict.items() %}
-          ['Brand', 'Votes'],
-          ['{{ k }}', '{{ v }}'],
-          {% endfor %}
-        ]);
-
-
-        var options = {
-          title: 'Votes by Brand'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-      }
-    </script>
-
-{% endblock %}
-
 {% endblock %}
 
 
@@ -91,6 +61,10 @@
         </table>
     </div>
 
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div>
+        <p>
+            Putting a chart in here eventually.  Working on using Google Charts
+        </p>
+    </div>
 </div>
 {% endblock %}
