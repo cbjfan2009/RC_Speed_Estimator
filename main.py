@@ -120,6 +120,14 @@ def poll():
 
     return render_template("poll.html", poll_data=poll_data, poll_data_dict=poll_data_dict)
 
+# ######### need to get the Poll_response.response and Poll_response.count objects into array
+#sqlArray = []
+#for row.response, row.count in session.query(Poll_response):
+#    sqlArray.append(str(row.response), str(row.count))
+
+#print(sqlArray)
+
+
 
 @app.route('/estimator_data', methods=['POST', 'GET'])
 def estimator_data():
@@ -130,5 +138,7 @@ def estimator_data():
         return "Something went wrong with the database connection!"
 
 
+
 if __name__ == "__main__":
     app.run(debug=True)
+
