@@ -123,14 +123,12 @@ for x, y in sql_zipped:
 
 # Making arry using dictionary then trying to jsonify?
 
-sql_dic_array = {'Brand':'Vote Count'}
+# sql_dic_array = {'Brand':'Vote Count'}
 
-for item in sql_array:
-    sql_dic_array.update({item[0]: item[1]})
+# for item in sql_array:
+#    sql_dic_array.update({item[0]: item[1]})
 
-print(sql_dic_array)
-
-
+# DATA FOR GOOGLE CHART ISNT UPDATING AFTER THE POST.  EVEN AFTER PAGE REFRESH
 
 @app.route('/poll', methods=['POST', 'GET'])
 def poll():
@@ -140,6 +138,10 @@ def poll():
     for item in poll_data:
         poll_data_dict.update({item.response: item.count})
 
+    sql_dic_array = {'Brand': 'Vote Count'}
+
+    for item in sql_array:
+        sql_dic_array.update({item[0]: item[1]})
 
     if request.method == 'POST':
         response = request.form['poll']
