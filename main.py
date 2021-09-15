@@ -7,6 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from PIL import Image
 
+
 # ------------------postgresql connection -- if PostgreSQL is going to be used, like with Heroku!-----------------------
 # import psycopg2
 # postgres://vlinujzpemehpy:81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e@ec2-54-211-160-34.compute-1.amazonaws.com:5432/df5p5d20v6pbf9
@@ -105,12 +106,41 @@ def about():
     return render_template("about.html")
 
 
+# Making array of response/count data so I can put it into Google Charts trying list of lists
+
+sql_arr_response = [i.response for i in session.query(Poll_response)]
+sql_arr_count = [i.count for i in session.query(Poll_response)]
+
+# print(sql_arr_response)
+# print(sql_arr_count)
+
+sql_zipped = zip(sql_arr_response, sql_arr_count)
+
+sql_array = [['Brand', 'Vote Count']]
+for x, y in sql_zipped:
+    sql_array.append([x, y])
+
+
+# Making arry using dictionary then trying to jsonify?
+
+sql_dic_array = {'Brand':'Vote Count'}
+
+for item in sql_array:
+    sql_dic_array.update({item[0]: item[1]})
+
+print(sql_dic_array)
+
+
+
 @app.route('/poll', methods=['POST', 'GET'])
 def poll():
     poll_data = session.query(Poll_response).all()
     poll_data_dict = {}
+
     for item in poll_data:
         poll_data_dict.update({item.response: item.count})
+
+
     if request.method == 'POST':
         response = request.form['poll']
         session.query(Poll_response).filter(Poll_response.response == response).update(
@@ -118,14 +148,8 @@ def poll():
         )
         session.commit()
 
-    return render_template("poll.html", poll_data=poll_data, poll_data_dict=poll_data_dict)
+    return render_template("poll.html", poll_data=poll_data, poll_data_dict=poll_data_dict, sql_dic_array=sql_dic_array)
 
-# ######### need to get the Poll_response.response and Poll_response.count objects into array
-#sqlArray = []
-#for row.response, row.count in session.query(Poll_response):
-#    sqlArray.append(str(row.response), str(row.count))
-
-#print(sqlArray)
 
 
 
