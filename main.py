@@ -134,14 +134,12 @@ for x, y in sql_zipped:
 def poll():
     poll_data = session.query(Poll_response).all()
     poll_data_dict = {}
+    sql_dic_array = {'Brand': 'Vote Count'}
 
     for item in poll_data:
         poll_data_dict.update({item.response: item.count})
+        sql_dic_array.update({item.response: item.count})
 
-    sql_dic_array = {'Brand': 'Vote Count'}
-
-    for item in sql_array:
-        sql_dic_array.update({item[0]: item[1]})
 
     if request.method == 'POST':
         response = request.form['poll']
