@@ -1,5 +1,11 @@
 /*Ctr + F5 to hard refresh in Chrome to see different changes to CSS!!!
 /* Add a black background color to the top navigation */
+
+body {
+ background-image: url('\\static\\pentagon.png');
+ background-color: #cccccc;
+}
+
 html * {
     font-family: Arial, Helvetica, sans-serif;
     }

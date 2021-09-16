@@ -162,6 +162,10 @@ def estimator_data():
         return "Something went wrong with the database connection!"
 
 
+@app.route('/biography')
+def biography():
+    return render_template("biography.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
