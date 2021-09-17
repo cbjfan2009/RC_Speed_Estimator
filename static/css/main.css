@@ -2,7 +2,7 @@
 /* Add a black background color to the top navigation */
 
 body {
- background-image: url('\\static\\pentagon.png');
+ background-image: url('/static/pentagon.png');
  background-color: #cccccc;
 }
 
