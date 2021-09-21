@@ -162,3 +162,12 @@ table.sortable tbody tr:nth-child(2n) td {
 table.sortable tbody tr:nth-child(2n+1) td {
   background: #ccffff;
 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}

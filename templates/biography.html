@@ -21,6 +21,17 @@
 
 .item1 {
   grid-row-end: span 3;
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: black;
+  text-align: center;
+}
+
 </style>
 {% endblock %}
 
@@ -28,31 +39,41 @@
 
 <div>
     <div class="grid-container">
-        <H1 style="color:white; text-align: center;"> Please take a moment to read about me.</H1>
+        <div>
+            <H1 style="text-align: center;"> Please take a moment to read about me.</H1>
+        </div>
         <div class="item1">
             <img src="/static/Matt_Kiernan.jpg" alt="Picture of Matt" width="350px" height="400px" border="0">
         </div>
 
-        <div class="item2">
-        <p1>I'm going to add more to this later...but I'm busy!</p1>
+        <div class="item2" style="text-align: center;">
+            <p>Experienced programming in Python, as well as designing in HTML and CSS.</p>
         </div>
 
         <div class="item3">
-            <p>Here's going to be some more descriptive stuff</p>
+            <p>Previous experience working in Quality Assurance, Anatomical Pathology, and Printing & Mailing.</p>
         </div>
         <div class="item4">
-            <p>Another item will be here</p>
+            <p>Deployed apps using Heroku, Flask, SQLAlchemy</p>
         </div>
 
         <div class="item 5">
-            <p>Some more neat stuff to come here.</p>
+            <p>Comfortable with MS Word, Access, Excel.</p>
         </div>
 
         <div class="item6">
-            <p>I'm sure there will be another interesting tidbit here, too.</p>
+            <p>Wrote applications in Python to automate production to radically decrease production times.</p>
         </div>
     </div>
 </div>
-
+<div style="display: inline;">
+    <div class="footer">
+    <p style="font-size:25px;">Want to reach out?</p>
+    </div>
+    <div>
+        <a href="www.linkedin.com/in/matt-kiernan-36177612" target="_blank">Check me out on LinkedIn</a>
+        <img src="/static/linkedinicon.png" height=50px" width=45px">
+    </div>
+</div>
 
 {% endblock %}
