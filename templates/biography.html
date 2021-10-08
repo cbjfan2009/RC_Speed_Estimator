@@ -31,13 +31,21 @@
   color: black;
   text-align: center;
 }
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper > div {
+  flex: auto auto auto;
+}
 
 </style>
 {% endblock %}
 
 {% block body %}
 
-<div>
+<section>
     <div class="grid-container" >
         <div>
             <h2 style="text-align: center;"> Please take a moment to read about me.</h2>
@@ -65,19 +73,29 @@
             <p>Programmed applications in Python to automate production to radically decrease production times.</p>
         </div>
     </div>
-</div>
+</section>
 
-<div>
+<section>
     <h2 style="text-align:center; font-weight:900;">Technologies Used to Develop This Webapp</h2>
-    <div class="grid-container" id="tech-pics">
-        <img src="/static/Flask-logo.png" height="200px" width="300px">
-        <img src="/static/python-logo.png" height="200px" width="400px">
-        <img src="/static/sqlalchemy-logo.jpg" height="200px" width="300px">
+    <div class="grid-container">
+        <div>
+            <img src="/static/Flask-logo.png" height="200px" width="300px">
+        </div>
+        <div>
+            <img src="/static/python-logo.png" height="200px" width="400px">
+        </div>
+        <div>
+            <img src="/static/sqlalchemy-logo.jpg" height="200px" width="300px">
+        </div>
+        <div>
+            <img src="/static/postgres.png" height="200px" width="200px">
+        </div>
+        <div>
+            <img src="/static/heroku-logo.png" height="200px" width="200px">
+        </div>
     </div>
-    <div>
-        <img src="/static/postgres.png" height="300px" width="300px">
-    </div>
-</div>
+</section>
+
 
 
 
