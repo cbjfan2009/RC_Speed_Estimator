@@ -105,14 +105,16 @@ def index():
 def about():
     return render_template("about.html")
 
+@app.route('/about_me')
+def about_me():
+    return render_template("about_me.html")
+
 
 # Making array of response/count data so I can put it into Google Charts trying list of lists
 
 sql_arr_response = [i.response for i in session.query(Poll_response)]
 sql_arr_count = [i.count for i in session.query(Poll_response)]
 
-# print(sql_arr_response)
-# print(sql_arr_count)
 
 sql_zipped = zip(sql_arr_response, sql_arr_count)
 
@@ -121,14 +123,6 @@ for x, y in sql_zipped:
     sql_array.append([x, y])
 
 
-# Making arry using dictionary then trying to jsonify?
-
-# sql_dic_array = {'Brand':'Vote Count'}
-
-# for item in sql_array:
-#    sql_dic_array.update({item[0]: item[1]})
-
-# DATA FOR GOOGLE CHART ISNT UPDATING AFTER THE POST.  EVEN AFTER PAGE REFRESH
 
 @app.route('/poll', methods=['POST', 'GET'])
 def poll():

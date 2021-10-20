@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>About Me</title>
+<style>
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+  border: 1px solid black;
+}
+h1 {text-align:center;
+}
+
+
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-6">
+      <h1>Please take a few moments to read more about me</h1>
+  </div>
+  <div class="col-6">
+      <h3>If you'd like to reach out, please check me out on:</h3>
+      <a href="www.linkedin.com/in/matt-kiernan-36177612" target="_blank">Check me out on LinkedIn</a>
+      <img src="/static/linkedinicon.png" alt="LinkedIn Pic" height=38px" width=32px">
+      <p></p>
+  </div>
+</div>
+
+<div>
+    <div class="col-4">Row 2a</div>
+    <div class="col-4">Row 2b</div>
+    <div class="col-4">Row 2c</div>
+</div>
+
+<div>
+    <div class="col-6">Row 3a</div>
+    <div class="col-6">Row 3b</div>
+</div>
+
+<div>
+    <div class="col-3">Row 4a</div>
+    <div class="col-3">Row 4b</div>
+    <div class="col-3">Row 4c</div>
+    <div class="col-3">Row 4d</div>
+</div>
+{% endblock %}
