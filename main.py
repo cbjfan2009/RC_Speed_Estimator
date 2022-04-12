@@ -109,6 +109,10 @@ def about():
 def about_me():
     return render_template("about_me.html")
 
+@app.route('/play_time')
+def play_time():
+    return render_template("play_time.html")
+
 
 # Making array of response/count data so I can put it into Google Charts trying list of lists
 

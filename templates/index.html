@@ -12,22 +12,22 @@
 
             <form action="/" method="POST">
                 <label for="motorkV">Motor kV Rating:</label>
-                <input class="user_input" type="number" id="motorkV" name="motorkV"><br><br>
+                <input class="user_input" type="number" id="motorkV" name="motorkV" required><br><br>
 
                 <label for="battVolt">Battery Voltage:</label>
-                <input class="user_input" type="number" id="battVolt" name="battVolt" step="0.01"><br><br>
+                <input class="user_input" type="number" id="battVolt" name="battVolt" step="0.01" required><br><br>
 
                 <label for="pinion">Pinion Gear Tooth Count:</label>
-                <input class="user_input" type="number" id="pinion" name="pinion"><br><br>
+                <input class="user_input" type="number" id="pinion" name="pinion" required><br><br>
 
                 <label for="spur">Spur Gear Tooth Count:</label>
-                <input class="user_input" type="number" id="spur" name="spur"><br><br>
+                <input class="user_input" type="number" id="spur" name="spur" required><br><br>
 
                 <label for="fgr">Final Gear Ratio (differential ratio?):</label>
-                <input class="user_input" type="number" id="fgr" name="fgr" step="0.01"><br><br>
+                <input class="user_input" type="number" id="fgr" name="fgr" step="0.01" required><br><br>
 
                 <label for="wheelradius">Wheel Radius (inches):</label>
-                <input class="user_input" type="number" id="wheelradius" name="wheelradius" step="0.01"><br><br>
+                <input class="user_input" type="number" id="wheelradius" name="wheelradius" step="0.01" required><br><br>
 
                 <input type="submit" value="Calculate">
             </form>
