@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, json
+from flask import Flask, render_template, request, json, redirect
 from math import pi
 import matplotlib.pyplot as plt
 import numpy as np
@@ -145,6 +145,7 @@ def poll():
             {Poll_response.count: Poll_response.count + 1}
         )
         session.commit()
+        return redirect(request.referrer)
 
     return render_template("poll.html", poll_data=poll_data, poll_data_dict=poll_data_dict, sql_dic_array=sql_dic_array)
 
