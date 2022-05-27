@@ -6,27 +6,15 @@ from sqlalchemy import create_engine, Column, Integer, Numeric, MetaData, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from PIL import Image
-
-
-# ------------------postgresql connection -- if PostgreSQL is going to be used, like with Heroku!-----------------------
-# import psycopg2
-# postgres://vlinujzpemehpy:81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e@ec2-54-211-160-34.compute-1.amazonaws.com:5432/df5p5d20v6pbf9
-# pgdb = psycopg2.connect(
-#   host='ec2-54-211-160-34.compute-1.amazonaws.com',
-#   user='vlinujzpemehpy',
-#   password='81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e',
-#   port='5432',
-#   database='df5p5d20v6pbf9'
-#   )
-# pgcursor = pgdb.cursor()
+from os import environ
+from boto.s3.connection import S3Connection
 
 
 # -------------------------------------SQLAlchemy approach-----------------------------------------------
 
 app = Flask(__name__)
 
-db_string = "postgresql://vlinujzpemehpy:81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e@ec2-54-211-" \
-            "160-34.compute-1.amazonaws.com:5432/df5p5d20v6pbf9"
+s3 = S3Connection(os.environ['S3_KEY'], os.environ['S3_SECRET'])
 
 db = create_engine(db_string, echo=True)
 
@@ -148,7 +136,6 @@ def poll():
         return redirect(request.referrer)
 
     return render_template("poll.html", poll_data=poll_data, poll_data_dict=poll_data_dict, sql_dic_array=sql_dic_array)
-
 
 
 
