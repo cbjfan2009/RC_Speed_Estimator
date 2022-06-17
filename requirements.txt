@@ -10,19 +10,15 @@ urllib3==1.26.3
 Werkzeug==1.0.1
 
 pip~=21.2.4
-mysql-connector-python~=8.0.26
 SQLAlchemy~=1.4.21
 
-psycopg2==2.9.1
+
 py~=1.10.0
 click~=7.1.2
-Django~=3.2.5
 six~=1.16.0
 protobuf~=3.17.3
 greenlet~=1.1.0
 setuptools~=49.2.1
 attrs~=20.3.0
-pytest~=6.2.2
-matplotlib~=3.4.3
-numpy~=1.21.2
-Pillow~=8.3.1
+
+

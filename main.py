@@ -1,20 +1,23 @@
 from flask import Flask, render_template, request, json, redirect
 from math import pi
-import matplotlib.pyplot as plt
-import numpy as np
+#import matplotlib.pyplot as plt
+#import numpy as np
 from sqlalchemy import create_engine, Column, Integer, Numeric, MetaData, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from PIL import Image
 from os import environ
-from boto.s3.connection import S3Connection
+from dotenv import load_dotenv
+
+
 
 
 # -------------------------------------SQLAlchemy approach-----------------------------------------------
 
 app = Flask(__name__)
 
-s3 = S3Connection(os.environ['S3_KEY'], os.environ['S3_SECRET'])
+load_dotenv()
+
+db_string = os.environ.get("db_string")
 
 db = create_engine(db_string, echo=True)
 
