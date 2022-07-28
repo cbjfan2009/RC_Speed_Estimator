@@ -2,111 +2,113 @@
 
 {% block head %}
 <title>Play Time</title>
-
-<!-- javascript for image gallery -->
-<script>
-var slideIndex = 1;
-showSlides(slideIndex);
-
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  background-color: #000099;
+  padding: 10px;
 }
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
+.grid-container > div {
+  background-color: rgb(0, 94, 128);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
 }
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  var captionText = document.getElementById("caption");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  captionText.innerHTML = dots[slideIndex-1].alt;
+.grid-container-2up {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  background-color: #000099;
+  padding: 10px;
 }
 
-</script>
+.item1 {
+  grid-row-end: span 3;
 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: black;
+  text-align: center;
+}
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper > div {
+  flex: auto auto auto;
+}
+
+</style>
 {% endblock %}
 
 {% block body %}
 
-<H1>
-    Additional Picture Gallery.
+<H1 style="text-align: center;">
+  Videos of My Truck In Action
 </H1>
 
+<div class="grid-container">
+  <div>
+    <iframe src="https://www.youtube.com/embed/X0a5LLkdTso" width="360" height="640"></iframe>
+  </div>
+
+  <div>
+    <iframe src="https://www.youtube.com/embed/ihIimSFzvnk" width="360" height="640"></iframe>
+  </div>
+
+  <div>
+    <iframe src="https://www.youtube.com/embed/Teh77lMcroQ" width="360" height="640"></iframe>
+  </div>
+
+</div>
+
+
 <!-- Container for the image gallery -->
-<div class="container">
+<div class="grid-container-2up">
 
-  <!-- Full-width images with number text -->
-  <div class="mySlides" style="display:block">
-    <div class="numbertext">1 / 5</div>
-      <img src="/static/frosty.jpg" style="width:100%">
+  <div>
+      <img src="/static/frosty.jpg" style="padding-left:75px">
   </div>
 
-  <div class="mySlides">
-    <div class="numbertext">2 / 5</div>
-      <img src="/static/double_battery.jpg" style="width:100%">
+  <div>
+      <img src="/static/double_battery.jpg" style="">
   </div>
 
-  <div class="mySlides">
-    <div class="numbertext">3 / 5</div>
-      <img src="/static/broken_leg.jpg" style="height:100%">
+  <div style="width:720px">
+      <img src="/static/broken_leg.jpg" style="padding-left:50px">
+      <img src="/static/front_assembly.jpg" style="padding-left:25px">
   </div>
 
-  <div class="mySlides">
-    <div class="numbertext">4 / 5</div>
-      <img src="/static/front_assembly_front.jpg" style="height:100%">
+  <div>
+      <img src="/static/snow_pose.jpg" style="">
   </div>
 
-  <div class="mySlides">
-    <div class="numbertext">5 / 5</div>
-      <img src="/static/snow_pose.jpg" style="width:100%">
+  <div>
+      <img src="/static/front_assembly_front.jpg" style="width:720px">
+  </div>
+  <div style="background-color:rgb(0, 94, 128); padding:10px;">
+    <h3 style="text-align:center; color:red;">
+      Image Descriptions
+    </h3>
+    <p style="color:white; font-weight:bold">
+      Top left: snow accumulation inside of body.<br>
+      Top right: modified internals (sanded battery compartment to accommodate dual-battery).<br><br>
+      Middle left: crash damage -- broken shock-shaft.<br>
+      Middle middle: upgraded front steering to blue aluminium tubes and heavier turnbuckles.<br>
+      Middle right: truck posed in the snow at local decommissioned quarry.<br><br>
+      Bottom left: better view of new front suspension and steering.
+    </p>
   </div>
 
-
-  <!-- Next and previous buttons -->
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-  <!-- Image text -->
-  <div class="caption-container">
-    <p id="caption"></p>
-  </div>
-
-  <!-- Thumbnail images -->
-  <div class="row">
-    <div class="column">
-      <img class="demo" src="/static/frosty.jpg" style="width:100%" onclick="currentSlide(1)" alt="Snow-Bashing">
-    </div>
-    <div class="column">
-      <img class="demo" src="/static/double_battery.jpg" style="width:100%" onclick="currentSlide(2)"
-           alt="Battery Compartment Modified For Dual-Battery">
-    </div>
-    <div class="column">
-      <img class="demo" src="/static/broken_leg.jpg" style="width:100%" onclick="currentSlide(3)"
-           alt="Broken Shock Shaft From Crash">
-    </div>
-    <div class="column">
-      <img class="demo" src="/static/front_assembly_front.jpg" style="width:100%" onclick="currentSlide(4)"
-           alt="Front Assembly
-      (GTR Shocks, MIP 17mm Hexes, Steel HD CVDs, Tubes Toe-Links.)">
-    </div>
-    <div class="column">
-      <img class="demo" src="/static/snow_pose.jpg" style="width:100%" onclick="currentSlide(5)" alt="Snow Pose">
-    </div>
-  </div>
 </div>
 
 
