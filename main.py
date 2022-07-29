@@ -17,10 +17,7 @@ app = Flask(__name__)
 # pull in the environmental variable for the database string
 load_dotenv()
 db_string = os.getenv('db_string')
-print(db_string)
 
-#db_string = "postgresql://vlinujzpemehpy:81bb09e53a2532c52b6a8696ebf0497b253e0a0516f0c1c741d5ceae3e10806e@ec2-54-211-" \
-#            "160-34.compute-1.amazonaws.com:5432/df5p5d20v6pbf9"
 
 db = create_engine(db_string, echo=True)
 

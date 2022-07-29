@@ -5,3 +5,5 @@ psycopg2-binary==2.9.3
 SQLAlchemy==1.4.21
 
 python-dotenv==0.20.0
+
+gunicorn==19.0.0
